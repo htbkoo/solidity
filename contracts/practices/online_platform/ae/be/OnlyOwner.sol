@@ -1,4 +1,4 @@
-pragma solidity >=0.4.22 <=0.8.18;
+pragma solidity >=0.4.22 <=0.8.17;
 
 contract OnlyOwner {
     // Write your code here
