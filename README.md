@@ -1,4 +1,9 @@
-REMIX DEFAULT WORKSPACE
+# solidity
+Solidity - repo to practise using Solidity
+
+### From REMIX DEFAULT WORKSPACE
+
+[//]: # (copied from https://remix.ethereum.org/)
 
 Remix default workspace is present when:
 i. Remix loads for the very first time
