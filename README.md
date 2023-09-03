@@ -1,5 +1,8 @@
 # solidity
+
 Solidity - repo to practise using Solidity
+
+---
 
 ### From REMIX DEFAULT WORKSPACE
 
