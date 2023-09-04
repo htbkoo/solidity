@@ -7,8 +7,6 @@ contract EtherMath {
     uint reward;
     mapping(address=>uint) rewards;
 
-    bool hasUnsolvedChallenge;
-
     address owner;
     constructor() {
         owner = msg.sender;
@@ -21,9 +19,8 @@ contract EtherMath {
         // Write your code here
         require(msg.value > 0);
         require(msg.sender == owner);
-        require(!hasUnsolvedChallenge);
+        require(reward == 0);
 
-        // hasUnsolvedChallenge = true;
         reward = msg.value;
         challengeArray = array;
         for (uint i = 0; i < array.length; ++i) {
@@ -34,7 +31,6 @@ contract EtherMath {
 
     function submitSolution(int256[] memory solution) public {
         // Write your code here
-        // require(hasUnsolvedChallenge);
         require(reward > 0);
 
         int256 sum = 0;
@@ -47,7 +43,6 @@ contract EtherMath {
 
         bool isSolved = sum == challengeTargetSum;
         if (isSolved) {
-            // hasUnsolvedChallenge = false;
             for (uint i = 0; i < challengeArray.length; ++i) {
                 delete challengeArrayCounter[challengeArray[i]];
             }
