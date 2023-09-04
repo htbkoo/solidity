@@ -7,6 +7,9 @@ contract EtherMath {
     uint reward;
     mapping(address=>uint) rewards;
 
+    mapping(address=>bool) hasSubmitted;
+    address[] submittedUsers;
+
     address owner;
     constructor() {
         owner = msg.sender;
@@ -32,6 +35,10 @@ contract EtherMath {
     function submitSolution(int256[] memory solution) public {
         // Write your code here
         require(reward > 0);
+        require(!hasSubmitted[msg.sender]);
+
+        hasSubmitted[msg.sender] = true;
+        submittedUsers.push(msg.sender);
 
         int256 sum = 0;
         // mapping(int256=>uint) memory counter;
@@ -48,6 +55,11 @@ contract EtherMath {
             }
             rewards[msg.sender] += reward;
             reward = 0;
+
+            for (uint i = 0; i < submittedUsers.length; ++i) {
+                delete hasSubmitted[submittedUsers[i]];
+            }
+            delete submittedUsers;
         }
     }
 
