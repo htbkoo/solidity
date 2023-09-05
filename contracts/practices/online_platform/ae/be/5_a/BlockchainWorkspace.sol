@@ -11,9 +11,9 @@ contract Employee {
     string _firstName;
     string _lastName;
     uint _hourlyPay;
-    uint _department;
+    Department _department;
 
-    constructor(string memory firstName, string memory lastName, uint hourlyPay, uint department) {
+    constructor(string memory firstName, string memory lastName, uint hourlyPay, Department department) {
         _firstName = firstName;
         _lastName = lastName;
         _hourlyPay = hourlyPay;
@@ -36,22 +36,20 @@ contract Employee {
 contract Manager is Employee {
     // Write tour code here
     Employee[] subordinates;
-    string[] firstNames;
 
-    constructor(string memory firstName, string memory lastName, uint hourlyPay, uint department) Employee(firstName, lastName, hourlyPay, department) {
+    constructor(string memory firstName, string memory lastName, uint hourlyPay, Department department) Employee(firstName, lastName, hourlyPay, department) {
     }
 
-    function addSubordinate(string memory firstName, string memory lastName, uint hourlyPay, uint department) public {
+    function addSubordinate(string memory firstName, string memory lastName, uint hourlyPay, Department department) public {
         Employee employee = new Employee(firstName, lastName, hourlyPay, department);
         subordinates.push(employee);
-        firstNames.push(firstName);
     }
 
     function getSubordinates() public view returns (string[] memory) {
-        // string[] storage firstNames;
-        // for (uint i = 0; i < subordinates.length; ++i) {
-        //     firstNames.push(subordinates[i].getFirstName());
-        // }
+        string[] memory firstNames = new string[](subordinates.length);
+        for (uint i = 0; i < subordinates.length; ++i) {
+            firstNames[i] = subordinates[i].getFirstName();
+        }
         return firstNames;
     }
 }
